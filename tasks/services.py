@@ -8,8 +8,10 @@ def set_contact_payload():
     n.b: here we assume the strings are large enough to get unicity.
     :return: hash random_contact: a random contact payload.
     """
-    first_name = ''.join([random.choice(string.ascii_letters.lower()) for _ in range(10)])
-    surname = ''.join([random.choice(string.ascii_letters.lower()) for _ in range(10)])
+    first_name = random.choice(string.ascii_letters.upper()) \
+        + ''.join([random.choice(string.ascii_letters.lower()) for _ in range(9)])
+    surname = random.choice(string.ascii_letters.upper()) \
+        + ''.join([random.choice(string.ascii_letters.lower()) for _ in range(9)])
     username = ''.join([random.choice(string.ascii_letters + string.digits) for _ in range(10)])
     email1 = ''.join([random.choice(string.ascii_letters) for _ in range(10)]) + \
         '@' + ''.join([random.choice(string.ascii_letters) for _ in range(7)]) + '.com'
@@ -20,5 +22,4 @@ def set_contact_payload():
                       'surname': surname,
                       'username': username,
                       'emails': [{'email': email1}, {'email': email2}]}
-
     return random_contact
