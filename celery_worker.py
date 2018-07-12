@@ -20,8 +20,8 @@ def create_celery(app):
     return celery
 
 
-flask_app = create_app()
-celery = create_celery(flask_app)
+app = create_app()
+celery = create_celery(app)
 
 
 @celery.on_after_configure.connect
@@ -34,9 +34,14 @@ def setup_periodic_tasks(sender, **kwargs):
     """
 
     # The task to create random contacts: every 15 seconds
-    sender.add_periodic_task(15.0, create_contact, name='Create every 15s')
+    sender.add_periodic_task(15, create_contact,
+                             args=(app.config['CONTACT_API_URL'],),
+                             name='Create every 15s')
 
     # The task to remove random contacts: every 60 seconds
-    sender.add_periodic_task(60.0, delete_contacts, name='Delete every 60s')
+    delete_from_seconds = 60
+    sender.add_periodic_task(delete_from_seconds, delete_contacts,
+                             args=(app.config['CONTACT_API_URL'] + delete_from_seconds,),
+                             name='Delete every 60s')
 
 

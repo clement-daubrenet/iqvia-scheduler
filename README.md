@@ -10,7 +10,8 @@ A task scheduler
 
 # Run locally
 
-- redis-server running on localhost:6379 (see config,py)
+- contact API running on http://0.0.0.0:7000/ (or update config.py)
+- redis-server running on localhost:6379 (or update config,py)
 - Launch the worker: celery -A celery_worker:celery worker --loglevel=INFO
 - Launch the beat: celery -A celery_worker:celery beat --loglevel=INFO
 
