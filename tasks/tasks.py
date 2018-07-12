@@ -13,6 +13,7 @@ def create_contact(create_url):
     """
     Task creating a random contact by calling the contact API.
     :param create_url: The URL to call to add a contact.
+    e.g: http://0.0.0.0:7000/contacts
     :return:
     """
 
@@ -26,8 +27,9 @@ def create_contact(create_url):
 @celery.task
 def delete_contacts(delete_url):
     """
-    Task deleting contacts created before 1 minute from now.
+    Task deleting contacts by calling the contact API.
     :param delete_url: The URL to call to add a contact.
+    e.g: http://0.0.0.0:7000/contacts/60 to delete all the entries inserted before 60 seconds from now.
     :return:
     """
     logger.info('-- Deleting contacts created 1 minute from now --')
